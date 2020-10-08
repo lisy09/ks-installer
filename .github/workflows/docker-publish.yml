@@ -2,35 +2,45 @@ name: Docker
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
-      - master
+      - release-3.0-multiarch
 
 env:
-  # TODO: Change variable to your image's name.
   IMAGE_NAME: ks-installer
-  IMAGE_REPO: kubespheredev
-  IMAGE_VERSION: latest
+  IMAGE_REPO: lisy09kubesphere
+  IMAGE_VERSION: v3.0.0
+  DOCKER_PLATFORMS: linux/amd64,linux/arm64
 
 jobs:
   push:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          version: latest
+
+      - name: Builder instance name
+        run: echo ${{ steps.buildx.outputs.name }}
+
+      - name: Available platforms
+        run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Log into registry
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - name: Push image
+      - name: Build and push image
         run: |
           IMAGE_ID=$IMAGE_REPO/$IMAGE_NAME
-
           echo IMAGE_ID=$IMAGE_ID
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$IMAGE_VERSION
+          docker buildx build \
+            --file Dockerfile
+            --tag $IMAGE_ID:$IMAGE_VERSION \
+            --platform $DOCKER_PLATFORMS .
+
           docker push $IMAGE_ID:$IMAGE_VERSION
