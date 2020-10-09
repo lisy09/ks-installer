@@ -228,7 +228,7 @@ spec:
       serviceAccountName: ks-installer
       containers:
       - name: installer
-        image: kubesphere/ks-installer:v3.0.0
+        image: lisy09kubesphere/ks-installer:v3.0.0
         imagePullPolicy: "Always"
         volumeMounts:
         - mountPath: /etc/localtime
