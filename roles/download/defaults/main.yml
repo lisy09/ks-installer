@@ -97,10 +97,13 @@ ks_image_tag: "{{ dev_tag | default('latest') }}"
 # Also provide the address of your own private registry.
 # And use --insecure-registry options for docker
 
+# base_org: kubesphere
+base_org: lisy09kubesphere
+
 #KubeSphere:
-ks_apiserver_repo: "{{ base_repo }}kubesphere/ks-apiserver"
+ks_apiserver_repo: "{{ base_repo }}{{ base_org }}/ks-apiserver"
 ks_apiserver_tag: v3.0.0
-ks_controller_manager_repo: "{{ base_repo }}kubesphere/ks-controller-manager"
+ks_controller_manager_repo: "{{ base_repo }}{{ base_org }}/ks-controller-manager"
 ks_controller_manager_tag: v3.0.0
 ks_update_repo: "{{ base_repo }}kubesphere/ks-upgrade"
 ks_update_tag: v3.0.0
