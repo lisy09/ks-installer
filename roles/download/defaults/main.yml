@@ -37,7 +37,8 @@ image_arch: "{{host_architecture | default('amd64')}}"
 # Versions
 ks_version: 2.1.0
 kube_version: v1.15.5
-etcd_version: v3.2.18
+# etcd_version: v3.2.18
+etcd_version: 3.4.10
 # kube image repo define
 ks_image_repo: >-
   {% if local_registry is defined and local_registry != "" -%}
@@ -109,22 +110,22 @@ ks_update_repo: "{{ base_repo }}kubesphere/ks-upgrade"
 ks_update_tag: v3.0.0
 ks_devops_migration_repo: "{{ base_repo }}kubesphere/ks-devops"
 ks_devops_migration_tag: "flyway-v3.0.0"
-ks_console_repo: "{{ base_repo }}kubesphere/ks-console"
+ks_console_repo: "{{ base_repo }}{{ base_org }}/ks-console"
 ks_console_tag: v3.0.0
 ks_kubectl_repo: "{{ base_repo }}kubesphere/kubectl"
 ks_kubectl_tag: v1.0.0
-cloud_controller_manager_repo: "{{ base_repo }}kubesphere/cloud-controller-manager"
-cloud_controller_manager_tag: v1.4.0
+# cloud_controller_manager_repo: "{{ base_repo }}kubesphere/cloud-controller-manager"
+# cloud_controller_manager_tag: v1.4.0
 
 ks_image_pull_policy: IfNotPresent
 
 #ks-hostnic
-ks_hostnic_repo: "kubesphere/hostnic"
-ks_hostnic_tag: "v1.0.0-alpha"
+# ks_hostnic_repo: "kubesphere/hostnic"
+# ks_hostnic_tag: "v1.0.0-alpha"
 
 #ks-installer
-ks_installer_repo: "{{ base_repo }}kubesphere/ks-installer"
-ks_installer_tag: v2.1.1
+ks_installer_repo: "{{ base_repo }}{{ base_org }}/ks-installer"
+ks_installer_tag: v3.0.0
 
 #ks-notification
 notification_flyway_repo: "{{ base_repo }}kubesphere/notification"
@@ -389,8 +390,10 @@ haproxy_repo:  "{{ base_library_repo }}haproxy"
 haproxy_tag: 2.0.4
 busybox_repo: "{{ base_library_repo }}alpine"
 busybox_tag: 3.10.4
-etcd_image_repo: "{{ base_repo }}kubesphere/etcd"
-etcd_image_tag: "{{ etcd_version }}{%- if image_arch != 'amd64' -%}-{{ image_arch }}{%- endif -%}"
+# etcd_image_repo: "{{ base_repo }}kubesphere/etcd"
+etcd_image_repo: "lisy09/etcd"
+# etcd_image_tag: "{{ etcd_version }}{%- if image_arch != 'amd64' -%}-{{ image_arch }}{%- endif -%}"
+etcd_image_tag: "{{ etcd_version }}"
 mysql_repo: "{{ base_library_repo }}mysql"
 mysql_tag: 8.0.11
 xtrabackup_repo: "{{ base_repo }}googlecontainer/xtrabackup"
