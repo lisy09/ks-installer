@@ -80,6 +80,16 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: db-persistent-storage
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
       containers:
       - name: mysql
         image: {{ mysql_repo }}:{{ mysql_tag }}
