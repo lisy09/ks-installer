@@ -55,8 +55,8 @@ haproxy:
   ##
   exporter:
     image:
-      repository: quay.io/prometheus/haproxy-exporter
-      tag: v0.9.0
+      repository: {{ haproxy_exporter_repo }}
+      tag: {{ haproxy_exporter_tag }}
     enabled: false
     port: 9101
   init:
@@ -198,8 +198,8 @@ affinity: |
 # Prometheus exporter specific configuration options
 exporter:
   enabled: false
-  image: oliver006/redis_exporter
-  tag: v0.31.0
+  image: {{ redis_exporter_repo }}
+  tag: {{ redis_exporter_tag }}
   pullPolicy: IfNotPresent
 
   # prometheus port & scrape path

@@ -390,8 +390,15 @@ jaeger_query_tag: 1.17
 #base:
 redis_repo: "{{ base_library_repo }}redis"
 redis_tag: 5.0.5-alpine
+# redis_exporter_repo: "oliver006/redis_exporter"
+redis_exporter_repo: "lisy09/redis_exporter"
+# redis_exporter_tag: v0.31.0
+redis_exporter_tag: v1.12.1
 haproxy_repo:  "{{ base_library_repo }}haproxy"
 haproxy_tag: 2.0.4
+# haproxy_exporter_repo:  "quay.io/prometheus/haproxy-exporter"
+haproxy_exporter_repo:  "lisy09/haproxy-exporter"
+haproxy_exporter_tag: v0.9.0
 busybox_repo: "{{ base_library_repo }}alpine"
 busybox_tag: 3.10.4
 # etcd_image_repo: "{{ base_repo }}kubesphere/etcd"
