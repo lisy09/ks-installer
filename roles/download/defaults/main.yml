@@ -325,7 +325,9 @@ notification_manager_tag: v0.1.0
 docker_elasticsearch_curator_repo: "{{ base_repo }}kubesphere/elasticsearch-curator"
 docker_elasticsearch_curator_tag: v5.7.6
 elasticsearch_oss_repo: "{{ base_repo }}kubesphere/elasticsearch-oss"
+# elasticsearch_oss_repo: "docker.elastic.co/elasticsearch/elasticsearch-oss"
 elasticsearch_oss_tag: 6.7.0-1
+# elasticsearch_oss_tag: 7.9.2
 kibana_oss_repo: "{{ elastic_image_repo }}/kibana/kibana-oss"
 kibana_oss_tag: 6.7.0
 testFramework_repo: "{{ base_repo }}dduportal/bats"

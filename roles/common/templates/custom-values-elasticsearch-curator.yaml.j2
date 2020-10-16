@@ -17,7 +17,17 @@ image:
   repository: {{ docker_elasticsearch_curator_repo }}
   tag: {{ docker_elasticsearch_curator_tag }}
   pullPolicy: IfNotPresent
-  
+
+affinity:
+  nodeAffinity: 
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/arch
+          operator: In
+          values:
+          - amd64
+
 hooks:
   install: false
   upgrade: false
