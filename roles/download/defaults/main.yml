@@ -161,10 +161,14 @@ release_app_repo: "{{ base_repo }}openpitrix/release-app"
 release_app_tag: "{{ op_version }}"
 generate_kubeconfig_repo: "{{ base_repo }}openpitrix/generate-kubeconfig"
 generate_kubeconfig_tag: "{{ op_version }}"
-minio_repo: "{{ base_repo }}minio/minio"
-minio_tag: RELEASE.2019-08-07T01-59-21Z
-mc_repo: "{{ base_repo }}minio/mc"
-mc_tag: RELEASE.2019-08-07T23-14-43Z
+# minio_repo: "{{ base_repo }}minio/minio"
+minio_repo: "{{ base_repo }}lisy09/minio"
+# minio_tag: RELEASE.2019-08-07T01-59-21Z
+minio_tag: RELEASE.2020-10-12T21-53-21Z
+# mc_repo: "{{ base_repo }}minio/mc"
+mc_repo: "{{ base_repo }}lisy09/minio-mc"
+# mc_tag: RELEASE.2019-08-07T23-14-43Z
+mc_tag: RELEASE.2020-10-03T02-54-56Z
 
 #ks-hostnic
 snapshot_controller_repo: "{{ base_repo }}csiplugin/snapshot-controller"
