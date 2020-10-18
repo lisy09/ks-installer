@@ -11,3 +11,12 @@ spec:
           image: {{ fluentbit_operator_repo }}:{{ fluentbit_operator_migrator_tag }}
       restartPolicy: Never
       serviceAccountName: fluentbit-operator-migrator
+      affinity:
+        nodeAffinity: 
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
