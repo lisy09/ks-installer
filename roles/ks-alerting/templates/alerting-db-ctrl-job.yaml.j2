@@ -24,6 +24,15 @@ spec:
         image: {{ busybox_repo }}:{{ busybox_tag }}
         imagePullPolicy: IfNotPresent
         command: ['sh', '-c', 'until nc -z {{ dbHost }} {{ dbPort }}; do echo "waiting for mysql"; sleep 2; done;']
+      affinity:
+        nodeAffinity: 
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
       - command: ["flyway", "-X", "-url=jdbc:mysql://{{ dbHost }}/alert", "-user=root", "-validateOnMigrate=false", "-locations=filesystem:/flyway/sql/alert", "migrate"]
         env:

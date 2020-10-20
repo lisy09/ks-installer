@@ -4,6 +4,8 @@
 
 In addition to supporting deploying on VM and BM, KubeSphere also supports installing on cloud-hosted and on-premises existing Kubernetes clusters.
 
+> This is a fork from [kubesphere/ks-installer](https://github.com/kubesphere/ks-installer) to support multiarch cluster.
+
 ## Prerequisites
 
 > - Kubernetes Version: 1.15.x, 1.16.x, 1.17.x, 1.18.x;
@@ -47,6 +49,13 @@ If your Kubernetes cluster environment meets all requirements mentioned above, t
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/ks-installer/v3.0.0/deploy/kubesphere-installer.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubesphere/ks-installer/v3.0.0/deploy/cluster-configuration.yaml
+```
+
+> This is a fork from [kubesphere/ks-installer](https://github.com/kubesphere/ks-installer) to support multiarch cluster.
+> Use commands below instead
+> 
+```bash
+kubectl apply -f https://raw.githubusercontent.com/lisy09/ks-installer/release-3.0-multiarch/deploy/kubesphere-installer.yaml
 ```
 
 Then inspect the logs of installation.

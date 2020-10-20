@@ -15,6 +15,15 @@ Master:
   ServiceType: NodePort
   NodePort: 30180
   HealthProbes: false
+  Affinity:
+    nodeAffinity: 
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
 
   InitContainerEnv:
     - name: JENKINS_UC_DOWNLOAD

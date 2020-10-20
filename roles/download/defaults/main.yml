@@ -37,8 +37,8 @@ image_arch: "{{host_architecture | default('amd64')}}"
 # Versions
 ks_version: 2.1.0
 kube_version: v1.15.5
-# etcd_version: v3.2.18
-etcd_version: 3.4.10
+etcd_version: v3.2.18
+# etcd_version: 3.4.10
 # kube image repo define
 ks_image_repo: >-
   {% if local_registry is defined and local_registry != "" -%}
@@ -112,7 +112,7 @@ ks_devops_migration_repo: "{{ base_repo }}kubesphere/ks-devops"
 ks_devops_migration_tag: "flyway-v3.0.0"
 ks_console_repo: "{{ base_repo }}{{ base_org }}/ks-console"
 ks_console_tag: v3.0.0
-ks_kubectl_repo: "{{ base_repo }}kubesphere/kubectl"
+ks_kubectl_repo: "{{ base_repo }}{{ base_org }}/kubectl"
 ks_kubectl_tag: v1.0.0
 # cloud_controller_manager_repo: "{{ base_repo }}kubesphere/cloud-controller-manager"
 # cloud_controller_manager_tag: v1.4.0
@@ -296,16 +296,18 @@ configmap_reload_repo: "{{ base_repo }}jimmidyson/configmap-reload"
 configmap_reload_tag: v0.3.0
 prometheus_repo: "{{ base_repo }}prom/prometheus"
 prometheus_tag: v2.20.1
-prometheus_config_reloader_repo: "{{ base_repo }}kubesphere/prometheus-config-reloader"
+prometheus_config_reloader_repo: "{{ base_repo }}{{ base_org }}/prometheus-config-reloader"
 prometheus_config_reloader_tag: v0.38.3
-prometheus_operator_repo: "{{ base_repo }}kubesphere/prometheus-operator"
+prometheus_operator_repo: "{{ base_repo }}{{ base_org }}/prometheus-operator"
 prometheus_operator_tag: v0.38.3
-kube_rbac_proxy_repo: "{{ base_repo }}kubesphere/kube-rbac-proxy"
+kube_rbac_proxy_repo: "{{ base_repo }}{{ base_org }}/kube-rbac-proxy"
 kube_rbac_proxy_tag: v0.4.1
-kube_state_metrics_repo: "{{ base_repo }}kubesphere/kube-state-metrics"
+kube_state_metrics_repo: "{{ base_repo }}{{ base_org }}/kube-state-metrics"
 kube_state_metrics_tag: v1.9.6
-node_exporter_repo: "{{ base_repo }}kubesphere/node-exporter"
-node_exporter_tag: ks-v0.18.1
+# node_exporter_repo: "{{ base_repo }}kubesphere/node-exporter"
+# node_exporter_tag: ks-v0.18.1
+node_exporter_repo: "{{ base_repo }}{{ base_org }}/node-exporter"
+node_exporter_tag: release-1.0-kubesphere
 prometheus_adapter_repo: "{{ base_repo }}kubesphere/k8s-prometheus-adapter-amd64"
 prometheus_adapter_tag: v0.6.0
 alertmanager_repo: "{{ base_repo }}prom/alertmanager"
@@ -314,20 +316,18 @@ grafana_repo: "{{ base_repo }}grafana/grafana"
 grafana_tag: 6.6.0
 
 #notification-manager
-notification_manager_operator_proxy_repo: "{{ base_repo }}kubesphere/kube-rbac-proxy"
+notification_manager_operator_proxy_repo: "{{ base_repo }}{{ base_org }}/kube-rbac-proxy"
 notification_manager_operator_proxy_tag: v0.4.1
-notification_manager_operator_repo: "{{ base_repo }}kubesphere/notification-manager-operator"
+notification_manager_operator_repo: "{{ base_repo }}{{ base_org }}/notification-manager-operator"
 notification_manager_operator_tag: v0.1.0
-notification_manager_repo: "{{ base_repo }}kubesphere/notification-manager"
+notification_manager_repo: "{{ base_repo }}{{ base_org }}/notification-manager"
 notification_manager_tag: v0.1.0
 
 #ks-logger
 docker_elasticsearch_curator_repo: "{{ base_repo }}kubesphere/elasticsearch-curator"
 docker_elasticsearch_curator_tag: v5.7.6
 elasticsearch_oss_repo: "{{ base_repo }}kubesphere/elasticsearch-oss"
-# elasticsearch_oss_repo: "docker.elastic.co/elasticsearch/elasticsearch-oss"
 elasticsearch_oss_tag: 6.7.0-1
-# elasticsearch_oss_tag: 7.9.2
 kibana_oss_repo: "{{ elastic_image_repo }}/kibana/kibana-oss"
 kibana_oss_tag: 6.7.0
 testFramework_repo: "{{ base_repo }}dduportal/bats"
@@ -405,10 +405,10 @@ haproxy_exporter_repo:  "lisy09/haproxy-exporter"
 haproxy_exporter_tag: v0.9.0
 busybox_repo: "{{ base_library_repo }}alpine"
 busybox_tag: 3.10.4
-# etcd_image_repo: "{{ base_repo }}kubesphere/etcd"
-etcd_image_repo: "lisy09/etcd"
-# etcd_image_tag: "{{ etcd_version }}{%- if image_arch != 'amd64' -%}-{{ image_arch }}{%- endif -%}"
-etcd_image_tag: "{{ etcd_version }}"
+etcd_image_repo: "{{ base_repo }}kubesphere/etcd"
+# etcd_image_repo: "lisy09/etcd"
+etcd_image_tag: "{{ etcd_version }}{%- if image_arch != 'amd64' -%}-{{ image_arch }}{%- endif -%}"
+# etcd_image_tag: "{{ etcd_version }}"
 mysql_repo: "{{ base_library_repo }}mysql"
 mysql_tag: 8.0.11
 xtrabackup_repo: "{{ base_repo }}googlecontainer/xtrabackup"

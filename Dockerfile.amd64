@@ -1,0 +1,17 @@
+FROM kubespheredev/shell-operator:v1.0.0-beta.5-alpine3.12
+
+ARG TARGETARCH
+ARG TARGETOS
+
+ENV  ANSIBLE_ROLES_PATH /kubesphere/installer/roles
+WORKDIR /kubesphere
+ADD controller/* /hooks/kubesphere/
+
+ADD roles /kubesphere/installer/roles
+ADD env /kubesphere/results/env
+ADD playbooks /kubesphere/playbooks
+USER root
+RUN wget https://storage.googleapis.com/kubernetes-release/release/v1.19.2/bin/${TARGETOS}/${TARGETARCH}/kubectl -O /bin/kubectl \
+    && chmod +x /bin/kubectl \
+    && ln -sf /bin/kubectl /usr/local/bin/kubectl
+USER kubesphere

@@ -33,6 +33,15 @@ spec:
       labels:
         app: alerting-manager
     spec:
+      affinity:
+        nodeAffinity: 
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       initContainers:
       - name: wait-mysql
         image: {{ busybox_repo }}:{{ busybox_tag }}
