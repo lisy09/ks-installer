@@ -60,6 +60,7 @@ cat <<EOF >> ${tmpdir}/csr.conf
 req_extensions = v3_req
 distinguished_name = req_distinguished_name
 [req_distinguished_name]
+
 [ v3_req ]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
@@ -72,7 +73,7 @@ DNS.3 = ${service}.${namespace}.svc
 EOF
 
 openssl genrsa -out ${tmpdir}/server-key.pem 2048
-openssl req -new -key ${tmpdir}/server-key.pem -subj "/CN=${service}.${namespace}.svc" -out ${tmpdir}/server.csr -config ${tmpdir}/csr.conf
+openssl req -new -key ${tmpdir}/server-key.pem -subj "/CN=system:node:${service}.${namespace}.svc/O=system:nodes" -out ${tmpdir}/server.csr -config ${tmpdir}/csr.conf
 
 # clean-up any previously created CSR for our service. Ignore errors if not present.
 kubectl delete csr ${csrName} 2>/dev/null || true
@@ -85,7 +86,7 @@ metadata:
   name: ${csrName}
 spec:
   groups:
-  - system:authenticated
+  - system:nodes
   request: $(cat ${tmpdir}/server.csr | base64 | tr -d '\n')
   usages:
   - digital signature
